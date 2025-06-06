@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Análisis de Ofertas de Trabajo</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-filter"></i> Filtros</h2>
+            </div>
+            <div class="sidebar-content">
+                <div class="filter-section">
+                    <h3>Tipo de Empleo</h3>
+                    <div class="filter-options" id="employment-type-filter"></div>
+                </div>
+                <div class="filter-section">
+                    <h3>Industria</h3>
+                    <div class="filter-options" id="industry-filter"></div>
+                </div>
+                <div class="filter-section">
+                    <h3>Ubicación</h3>
+                    <div class="filter-options" id="location-filter"></div>
+                </div>
+                <div class="filter-section" id="salary-filter"></div>
+                <button id="reset-filters" class="reset-btn">
+                    <i class="fas fa-redo"></i> Reiniciar Filtros
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <h1>Análisis de Ofertas de Trabajo Reales vs. Fraudulentas</h1>
+                <div class="metrics-container">
+                    <div class="metric-card">
+                        <div class="metric-value" id="total-jobs">0</div>
+                        <div class="metric-label">Ofertas Totales</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="fraud-jobs">0</div>
+                        <div class="metric-label">Ofertas Fraudulentas</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="fraud-rate">0%</div>
+                        <div class="metric-label">Tasa de Fraude</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="avg-description">0</div>
+                        <div class="metric-label">Avg. Caracteres Desc.</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Pipeline Visualization -->
+            <section class="pipeline-section">
+                <h2><i class="fas fa-chart-line"></i> Progreso del Análisis</h2>
+                <div class="pipeline-container" id="pipeline-viz"></div>
+            </section>
+
+            <!-- Main Visualizations -->
+            <section class="visualizations-grid">
+                <div class="viz-card">
+                    <h3><i class="fas fa-briefcase"></i> Tipo de Empleo vs. Fraude</h3>
+                    <div class="viz-container" id="employmentTypeChart"></div>
+                </div>
+                <div class="viz-card">
+                    <h3><i class="fas fa-align-left"></i> Longitud Descripción vs. Fraude</h3>
+                    <div class="viz-container" id="descriptionLengthChart"></div>
+                </div>
+                <div class="viz-card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Distribución Geográfica</h3>
+                    <div class="viz-container" id="geoDistributionMap"></div>
+                </div>
+                <div class="viz-card">
+                    <h3><i class="fas fa-tasks"></i> Requisitos vs. Fraude</h3>
+                    <div class="viz-container" id="requirementsChart"></div>
+                </div>
+                <div class="viz-card full-width">
+                    <h3><i class="fas fa-industry"></i> Fraude por Industria</h3>
+                    <div class="viz-container" id="fraudByIndustry"></div>
+                </div>
+                <div class="viz-card full-width">
+                    <h3><i class="fas fa-calendar-alt"></i> Tendencias Temporales</h3>
+                    <div class="viz-container" id="temporalTrendsChart"></div>
+                </div>
+                <div class="viz-card full-width">
+                    <h3><i class="fas fa-radar"></i> Especificidad de Requisitos</h3>
+                    <div class="viz-container" id="requirementsRadarChart"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="tooltip" class="hidden"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/visualizations.js"></script>
+    <script src="js/filters.js"></script>
+</body>
+</html>
